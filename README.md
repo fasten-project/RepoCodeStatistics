@@ -3,5 +3,5 @@ A Python script that aggregates statistics about the repositories analyzed by Re
 
 To run:
 ```
-python main.py 'fasten.RepoAnalyzerExtension.out' 'delft:9092'
+python3 main.py 'fasten.RepoAnalyzerExtension.out' 'delft:9092'
 ```
