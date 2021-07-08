@@ -14,6 +14,7 @@ def create_kafka_consumer(topic: str = 'fasten.RepoAnalyzerExtension.out',
     :param bootstrap_server: Kafka Bootstrap Server address
     :return: KafkaConsumer
     """
+    print('Creating Kafka consumer to consume from', topic, 'with bootstrap server at', bootstrap_server)
     return KafkaConsumer(
         topic,
         bootstrap_servers=[bootstrap_server],
@@ -39,6 +40,7 @@ def get_statistics(consumer: KafkaConsumer):
     avg_number_of_unit_tests = 0.0
     avg_test_files = 0.0
     try:
+        print('Starting to consume messages')
         for message in consumer:
             payload = message.value['payload']
             num_projects += 1.0
@@ -58,22 +60,25 @@ def get_statistics(consumer: KafkaConsumer):
             print('Projects processed:', int(num_projects))
     except KeyboardInterrupt:
         print('Processing interrupted after', int(num_projects), 'messages')
-    avg_unit_tests_with_mocks /= num_projects
-    avg_files_with_mock_imports /= num_projects
-    avg_source_files /= num_projects
-    avg_number_of_methods /= num_projects
-    avg_number_of_unit_tests /= num_projects
-    avg_test_files /= num_projects
-    return {
-        'num_projects': int(num_projects),
-        'build_managers': build_managers,
-        'avg_unit_tests_with_mocks': avg_unit_tests_with_mocks,
-        'avg_files_with_mock_imports': avg_files_with_mock_imports,
-        'avg_source_files': avg_source_files,
-        'avg_number_of_methods': avg_number_of_methods,
-        'avg_number_of_unit_tests': avg_number_of_unit_tests,
-        'avg_test_files': avg_test_files
-    }
+    if num_projects > 0:
+        avg_unit_tests_with_mocks /= num_projects
+        avg_files_with_mock_imports /= num_projects
+        avg_source_files /= num_projects
+        avg_number_of_methods /= num_projects
+        avg_number_of_unit_tests /= num_projects
+        avg_test_files /= num_projects
+        return {
+            'num_projects': int(num_projects),
+            'build_managers': build_managers,
+            'avg_unit_tests_with_mocks': avg_unit_tests_with_mocks,
+            'avg_files_with_mock_imports': avg_files_with_mock_imports,
+            'avg_source_files': avg_source_files,
+            'avg_number_of_methods': avg_number_of_methods,
+            'avg_number_of_unit_tests': avg_number_of_unit_tests,
+            'avg_test_files': avg_test_files
+        }
+    else:
+        return {'num_projects': num_projects}
 
 
 def main():
