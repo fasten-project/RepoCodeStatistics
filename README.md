@@ -8,7 +8,7 @@ source venv/bin/activate
 ```
 2. Install dependencies
 ```
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 3. Run the python script
 ```
