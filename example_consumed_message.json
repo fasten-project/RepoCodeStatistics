@@ -1,42 +1,44 @@
-{"payload":{
-   "buildManager":"maven",
-   "repoPath":"/mnt/fasten/repos/c/com.google.cloud/google-cloud-errorreporting-bom",
-   "modules":[
+{
+  "payload": {
+    "buildManager": "maven",
+    "repoPath": "/mnt/fasten/repos/c/com.google.cloud/google-cloud-errorreporting-bom",
+    "modules": [
       {
-         "unitTestsWithMocks":0,
-         "path":"/mnt/fasten/repos/c/com.google.cloud/google-cloud-errorreporting-bom/google-cloud-errorreporting",
-         "filesWithMockImport":3,
-         "sourceFiles":19,
-         "numberOfFunctions":205,
-         "numberOfUnitTests":28,
-         "testFiles":4,
-         "unitTestsToFunctionsRatio":0.137,
-         "testToSourceRatio":0.211,
-         "unitTestsMockingRatio":0
+        "unitTestsWithMocks": 0,
+        "path": "/mnt/fasten/repos/c/com.google.cloud/google-cloud-errorreporting-bom/google-cloud-errorreporting",
+        "filesWithMockImport": 3,
+        "sourceFiles": 19,
+        "numberOfFunctions": 205,
+        "numberOfUnitTests": 28,
+        "testFiles": 4,
+        "unitTestsToFunctionsRatio": 0.137,
+        "testToSourceRatio": 0.211,
+        "unitTestsMockingRatio": 0
       },
       {
-         "unitTestsWithMocks":0,
-         "path":"/mnt/fasten/repos/c/com.google.cloud/google-cloud-errorreporting-bom/proto-google-cloud-error-reporting-v1beta1",
-         "filesWithMockImport":0,
-         "sourceFiles":53,
-         "numberOfFunctions":1206,
-         "numberOfUnitTests":0,
-         "testFiles":0,
-         "unitTestsToFunctionsRatio":0,
-         "testToSourceRatio":0,
-         "unitTestsMockingRatio":0
+        "unitTestsWithMocks": 0,
+        "path": "/mnt/fasten/repos/c/com.google.cloud/google-cloud-errorreporting-bom/proto-google-cloud-error-reporting-v1beta1",
+        "filesWithMockImport": 0,
+        "sourceFiles": 53,
+        "numberOfFunctions": 1206,
+        "numberOfUnitTests": 0,
+        "testFiles": 0,
+        "unitTestsToFunctionsRatio": 0,
+        "testToSourceRatio": 0,
+        "unitTestsMockingRatio": 0
       },
       {
-         "unitTestsWithMocks":0,
-         "path":"/mnt/fasten/repos/c/com.google.cloud/google-cloud-errorreporting-bom/grpc-google-cloud-error-reporting-v1beta1",
-         "filesWithMockImport":0,
-         "sourceFiles":3,
-         "numberOfFunctions":78,
-         "numberOfUnitTests":0,
-         "testFiles":0,
-         "unitTestsToFunctionsRatio":0,
-         "testToSourceRatio":0,
-         "unitTestsMockingRatio":0
+        "unitTestsWithMocks": 0,
+        "path": "/mnt/fasten/repos/c/com.google.cloud/google-cloud-errorreporting-bom/grpc-google-cloud-error-reporting-v1beta1",
+        "filesWithMockImport": 0,
+        "sourceFiles": 3,
+        "numberOfFunctions": 78,
+        "numberOfUnitTests": 0,
+        "testFiles": 0,
+        "unitTestsToFunctionsRatio": 0,
+        "testToSourceRatio": 0,
+        "unitTestsMockingRatio": 0
       }
-   ]
-}}
+    ]
+  }
+}

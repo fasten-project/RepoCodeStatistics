@@ -56,7 +56,7 @@ def get_statistics(consumer: KafkaConsumer):
                 avg_number_of_unit_tests += float(module['numberOfUnitTests'])
                 avg_test_files += float(module['testFiles'])
             print('Projects processed:', int(num_projects))
-    except KeyBoardInterrupt:
+    except KeyboardInterrupt:
         print('Processing interrupted after', int(num_projects), 'messages')
     avg_unit_tests_with_mocks /= num_projects
     avg_files_with_mock_imports /= num_projects
