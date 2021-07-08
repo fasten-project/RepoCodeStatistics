@@ -38,22 +38,26 @@ def get_statistics(consumer: KafkaConsumer):
     avg_number_of_methods = 0.0
     avg_number_of_unit_tests = 0.0
     avg_test_files = 0.0
-    for message in consumer:
-        payload = message.value['payload']
-        num_projects += 1.0
-        build_manager = payload['buildManager']
-        if build_manager in build_managers:
-            build_managers[build_manager] = build_managers[build_manager] + 1
-        else:
-            build_managers[build_manager] = 1
-        modules = payload['modules']
-        for module in modules:
-            avg_unit_tests_with_mocks += float(module['unitTestsWithMocks'])
-            avg_files_with_mock_imports += float(module['filesWithMockImport'])
-            avg_source_files += float(module['sourceFiles'])
-            avg_number_of_methods += float(module['numberOfFunctions'])
-            avg_number_of_unit_tests += float(module['numberOfUnitTests'])
-            avg_test_files += float(module['testFiles'])
+    try:
+        for message in consumer:
+            payload = message.value['payload']
+            num_projects += 1.0
+            build_manager = payload['buildManager']
+            if build_manager in build_managers:
+                build_managers[build_manager] = build_managers[build_manager] + 1
+            else:
+                build_managers[build_manager] = 1
+            modules = payload['modules']
+            for module in modules:
+                avg_unit_tests_with_mocks += float(module['unitTestsWithMocks'])
+                avg_files_with_mock_imports += float(module['filesWithMockImport'])
+                avg_source_files += float(module['sourceFiles'])
+                avg_number_of_methods += float(module['numberOfFunctions'])
+                avg_number_of_unit_tests += float(module['numberOfUnitTests'])
+                avg_test_files += float(module['testFiles'])
+            print('Projects processed:', int(num_projects))
+    except KeyBoardInterrupt:
+        print('Processing interrupted after', int(num_projects), 'messages')
     avg_unit_tests_with_mocks /= num_projects
     avg_files_with_mock_imports /= num_projects
     avg_source_files /= num_projects
