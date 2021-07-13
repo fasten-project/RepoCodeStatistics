@@ -19,8 +19,7 @@ def create_kafka_consumer(topic: str = 'fasten.RepoAnalyzerExtension.out',
         topic,
         bootstrap_servers=[bootstrap_server],
         auto_offset_reset='earliest',
-        enable_auto_commit=True,
-        group_id='fasten.RepoCodeStatistics.consumerGroup',
+        consumer_timeout_ms=1000,
         value_deserializer=lambda x: loads(x.decode('utf-8')))
 
 

@@ -12,5 +12,5 @@ pip3 install -r requirements.txt
 ```
 3. Run the python script
 ```
-python3 main.py 'fasten.RepoAnalyzerExtension.out' 'delft:9092'
+python3 main.py 'fasten.RepoAnalyzerExtension.out' 'goteborg:9092'
 ```
