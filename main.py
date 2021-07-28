@@ -32,6 +32,16 @@ def get_statistics(consumer: KafkaConsumer):
     """
     build_managers = {}
     num_projects = 0.0
+    can_execute_tests = 0
+    avg_test_coverage = {
+        'branch_coverage': 0.0,
+        'class_coverage': 0.0,
+        'instruction_coverage': 0.0,
+        'complexity_coverage': 0.0,
+        'method_coverage': 0.0,
+        'line_coverage': 0.0
+    }
+    extracted_test_coverage = 0
     avg_unit_tests_with_mocks = 0.0
     avg_files_with_mock_imports = 0.0
     avg_source_files = 0.0
@@ -43,6 +53,16 @@ def get_statistics(consumer: KafkaConsumer):
         for message in consumer:
             payload = message.value['payload']
             num_projects += 1.0
+            if payload['canExecuteTests']:
+                can_execute_tests += 1
+            if payload['testCoverage'] != {}:
+                extracted_test_coverage += 1
+                avg_test_coverage['branch_coverage'] += payload['testCoverage']['branchCoverage']
+                avg_test_coverage['class_coverage'] += payload['testCoverage']['classCoverage']
+                avg_test_coverage['instruction_coverage'] += payload['testCoverage']['instructionCoverage']
+                avg_test_coverage['complexity_coverage'] += payload['testCoverage']['complexityCoverage']
+                avg_test_coverage['method_coverage'] += payload['testCoverage']['methodCoverage']
+                avg_test_coverage['line_coverage'] += payload['testCoverage']['lineCoverage']
             build_manager = payload['buildManager']
             if build_manager in build_managers:
                 build_managers[build_manager] = build_managers[build_manager] + 1
@@ -66,8 +86,17 @@ def get_statistics(consumer: KafkaConsumer):
         avg_number_of_methods /= num_projects
         avg_number_of_unit_tests /= num_projects
         avg_test_files /= num_projects
+        avg_test_coverage['branch_coverage'] /= float(extracted_test_coverage)
+        avg_test_coverage['class_coverage'] /= float(extracted_test_coverage)
+        avg_test_coverage['instruction_coverage'] /= float(extracted_test_coverage)
+        avg_test_coverage['complexity_coverage'] /= float(extracted_test_coverage)
+        avg_test_coverage['method_coverage'] /= float(extracted_test_coverage)
+        avg_test_coverage['line_coverage'] /= float(extracted_test_coverage)
         return {
             'num_projects': int(num_projects),
+            'can_execute_tests': can_execute_tests,
+            'extracted_test_coverage': extracted_test_coverage,
+            'avg_test_coverage': avg_test_coverage,
             'build_managers': build_managers,
             'avg_unit_tests_with_mocks': avg_unit_tests_with_mocks,
             'avg_files_with_mock_imports': avg_files_with_mock_imports,
